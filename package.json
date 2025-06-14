@@ -1,0 +1,19 @@
+{
+  "name": "fmg-wpp-bot",
+  "version": "1.0.0",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@nxlv/python": "^21.0.3",
+    "@types/bun": "latest",
+    "nx": "21.2.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ]
+}
