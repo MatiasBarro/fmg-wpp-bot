@@ -1,8 +1,8 @@
 {
-  "name": "mcp-server",
+  "name": "fm-gym-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/mcp-server/src",
+  "sourceRoot": "apps/fm-gym-api/src",
   "targets": {
     "lock": {
       "executor": "@nxlv/python:lock",
@@ -85,9 +85,26 @@
     "start": {
       "executor": "@nxlv/python:run-commands",
       "options": {
-        "command": "uv run src/server.py",
+        "command": "uv run src/main.py",
         "cwd": "{projectRoot}"
       }
+    },
+    "db:start": { 
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose up",
+        "cwd": "{projectRoot}"
+      },
+      "continuous": true
+    },
+    "dev": {
+      "executor": "@nxlv/python:run-commands",
+      "options": {
+        "command": "uv run uvicorn main:app --host 0.0.0.0 --port 3100 --reload",
+        "cwd": "{projectRoot}/src"
+      },
+      "dependsOn": ["db:start"],
+      "continuous": true
     }
   },
   "tags": [],

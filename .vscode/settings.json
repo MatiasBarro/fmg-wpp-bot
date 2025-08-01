@@ -1,3 +1,3 @@
 {
-    "python.defaultInterpreterPath": "${workspaceFolder}/apps/mcp-server/.venv/bin/python",
+    "python.defaultInterpreterPath": "${workspaceFolder}/apps/fm-gym-api/.venv/bin/python",
 }
