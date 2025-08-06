@@ -1,0 +1,14 @@
+{
+  "name": "fmg-wpp-bot-workspace",
+  "targets": {
+    "dev-mcp": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx dev-mcp fm-gym-api",
+          "bunx @modelcontextprotocol/inspector"
+        ]
+      }
+    }
+  }
+}

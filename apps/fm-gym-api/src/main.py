@@ -5,7 +5,7 @@ from fastapi_mcp import FastApiMCP
 from database import create_db_and_tables
 
 import models
-from groups import router as group_router
+from groups import group_router, mcp_router
 
 load_dotenv()
 
@@ -23,10 +23,20 @@ app = FastAPI(
 
 app.include_router(group_router)
 
+mcp_app = FastAPI(
+    lifespan=lifespan,
+)
 
-# @app.get("/bmi", operation_id="calculate_bmi", summary="this tool is used to calculate bmi based on weigth and height")
-# def calculate_bmi(weight_kg: float, height_m: float):
-#     return {"bmi": weight_kg / (height_m ** 2)}
+mcp_app.include_router(mcp_router)
 
-# mcp = FastApiMCP(app, name="BMI MCP", description="Simple application to calculate BMI")
-# mcp.mount()
+# MCP app
+mcp = FastApiMCP(
+    mcp_app,
+    name="FMG MCP", 
+    description="Simple application to manage FM Gymnastics school groups",
+    describe_all_responses=True,  # Include all possible response schemas
+    describe_full_response_schema=True  # Include full JSON schema in descriptions
+)
+
+mcp.mount_http()
+

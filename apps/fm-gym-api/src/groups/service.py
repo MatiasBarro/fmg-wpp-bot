@@ -20,8 +20,15 @@ class GroupService:
 
         return db_group
     
-    def get_groups(self) -> list[Group]:
-        return self.session.exec(select(Group))
+    def get_groups(self, age: int | None = None, name: str | None = None) -> list[Group]:
+        statement = select(Group)
+        if age:
+            statement = statement.where(Group.ageEnd >= age, Group.ageStart <= age)
+        
+        if name:
+            statement = statement.where(Group.name == name)
+        
+        return self.session.exec(statement)
     
     def get_group_by_id(self, group_id: int) -> Group:
         statement = select(Group).where(Group.id == group_id)

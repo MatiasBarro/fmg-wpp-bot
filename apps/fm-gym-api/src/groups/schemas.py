@@ -1,3 +1,4 @@
+from pydantic import BaseModel
 from models import GroupBase, GroupScheduleBase
 
 class CreateGroupSchema(GroupBase):
@@ -5,4 +6,11 @@ class CreateGroupSchema(GroupBase):
 
 class ReadGroupSchema(GroupBase):
     id: int
+    schedule: list[GroupScheduleBase]
+
+class MCPGetGroupsFilterSchema(BaseModel):
+    age: int
+
+class MCPReadGroupSchema(BaseModel):
+    name: str
     schedule: list[GroupScheduleBase]
