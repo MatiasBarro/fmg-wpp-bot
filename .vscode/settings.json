@@ -1,3 +1,15 @@
 {
     "python.defaultInterpreterPath": "${workspaceFolder}/apps/fm-gym-api/.venv/bin/python",
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "database": "fm-gym",
+            "username": "admin",
+            "name": "FM Gym"
+        }
+    ],
 }
