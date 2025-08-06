@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Depends
+
 from .schemas import MCPGetGroupsFilterSchema, MCPReadGroupSchema
 from .router import GroupServiceDep
 

@@ -2,6 +2,7 @@ from typing import Annotated, Optional
 from fastapi import APIRouter, Depends, Query
 from sqlmodel import Session
 from database import get_session
+from dependencies import require_api_key
 
 from .service import GroupService
 from .schemas import CreateGroupSchema, ReadGroupSchema
@@ -14,6 +15,7 @@ GroupServiceDep = Annotated[GroupService, Depends(get_group_service)]
 router = APIRouter(
     prefix="/groups",
     tags=["groups"],
+    dependencies=[Depends(require_api_key)],
 )
 
 @router.post("/", response_model=ReadGroupSchema)

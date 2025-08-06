@@ -1,8 +1,9 @@
 from contextlib import asynccontextmanager
 from dotenv import load_dotenv
-from fastapi import FastAPI
-from fastapi_mcp import FastApiMCP
+from fastapi import Depends, FastAPI
+from fastapi_mcp import FastApiMCP, AuthConfig
 from database import create_db_and_tables
+from dependencies import require_api_key
 
 import models
 from groups import group_router, mcp_router
@@ -35,7 +36,10 @@ mcp = FastApiMCP(
     name="FMG MCP", 
     description="Simple application to manage FM Gymnastics school groups",
     describe_all_responses=True,  # Include all possible response schemas
-    describe_full_response_schema=True  # Include full JSON schema in descriptions
+    describe_full_response_schema=True, # Include full JSON schema in descriptions
+    auth_config=AuthConfig(
+        dependencies=[Depends(require_api_key)],
+    )
 )
 
 mcp.mount_http()
