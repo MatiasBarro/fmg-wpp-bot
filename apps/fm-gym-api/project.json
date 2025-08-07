@@ -114,6 +114,13 @@
       },
       "continuous": true,
       "dependsOn": ["db:start"]
+    },
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t fm-gym-api:latest .",
+        "cwd": "{projectRoot}"
+      }
     }
   },
   "tags": [],
