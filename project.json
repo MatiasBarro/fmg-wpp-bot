@@ -4,11 +4,12 @@
     "dev-mcp": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": [
-          "nx dev-mcp fm-gym-api",
-          "bunx @modelcontextprotocol/inspector"
-        ]
-      }
+        "command": "bunx @modelcontextprotocol/inspector"
+      },
+      "dependsOn": [
+        { "projects": "fm-gym-api", "target": "dev" }
+      ],
+      "continuous": true
     }
   }
 }

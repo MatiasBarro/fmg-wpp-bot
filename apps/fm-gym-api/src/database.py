@@ -11,7 +11,6 @@ DATABASE_URL= f'postgresql+psycopg2://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTG
 engine = create_engine(DATABASE_URL)
 
 def create_db_and_tables():
-    # SQLModel.metadata.drop_all(engine)
     SQLModel.metadata.create_all(engine)
 
 def get_session():

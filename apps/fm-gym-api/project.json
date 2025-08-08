@@ -100,16 +100,7 @@
     "dev": {
       "executor": "@nxlv/python:run-commands",
       "options": {
-        "command": "uv run uvicorn main:app --host 0.0.0.0 --port 3200 --reload",
-        "cwd": "{projectRoot}/src"
-      },
-      "continuous": true,
-      "dependsOn": ["db:start"]
-    },
-    "dev-mcp": {
-      "executor": "@nxlv/python:run-commands",
-      "options": {
-        "command": "uv run uvicorn main:mcp_app --host 0.0.0.0 --port 3100 --reload",
+        "command": "uv run uvicorn main:app --host 0.0.0.0 --port 3100 --reload",
         "cwd": "{projectRoot}/src"
       },
       "continuous": true,
@@ -118,9 +109,20 @@
     "docker:build": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "docker build -t fm-gym-api:latest .",
+        "command": "docker build --platform linux/amd64 -t fm-gym-api:latest .",
         "cwd": "{projectRoot}"
       }
+    },
+    "docker:publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+           "docker tag fm-gym-api:latest matiasbarro/fm-gym-api:latest",
+           "docker push matiasbarro/fm-gym-api:latest"
+        ],
+        "cwd": "{projectRoot}"
+      },
+      "dependsOn": ["docker:build"]
     }
   },
   "tags": [],
