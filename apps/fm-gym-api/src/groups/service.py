@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from sqlmodel import Session, select
 from models import Group, GroupSchedule
 from .schemas import CreateGroupSchema
@@ -32,4 +33,8 @@ class GroupService:
     
     def get_group_by_id(self, group_id: int) -> Group:
         statement = select(Group).where(Group.id == group_id)
-        return self.session.exec(statement).first()
+        group = self.session.exec(statement).first()
+        if not group:
+            raise HTTPException(status_code=404, detail="Group not found")
+        
+        return group
